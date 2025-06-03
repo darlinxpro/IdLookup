@@ -89,7 +89,7 @@
     }
   }
 
-  // Función para copiar ID + Player ID + 1 al portapapeles
+  // Función para copiar ID + Player ID + 1 al portapapeles y animar la barra de carga
   function copyToClipboard(id) {
     const playerId = document.getElementById("playerId").value;
     if (!playerId) {
@@ -109,24 +109,28 @@
     const copyAlert = document.getElementById("copyAlert");
     copyAlert.style.display = "block";
 
-    // Mostrar barra de progreso
+    // Mostrar y animar barra de progreso
     const progressBar = document.getElementById("progressBar");
     const progressContainer = document.querySelector(".progress");
     progressContainer.style.display = "block";
+    
     let width = 0;
+    let totalTime = 2000; // 2 segundos
+    let intervalTime = totalTime / 100; // Incremento cada 20ms
 
-    // Animar la barra de progreso
     const interval = setInterval(() => {
+      width += 1;
+      progressBar.style.width = width + "%";
+      progressBar.setAttribute("aria-valuenow", width);
+
       if (width >= 100) {
         clearInterval(interval);
-        progressContainer.style.display = "none"; // Ocultar barra de carga después de 3 segundos
-        copyAlert.style.display = "none"; // Ocultar alerta
-      } else {
-        width += 10;
-        progressBar.style.width = width + "%";
-        progressBar.setAttribute("aria-valuenow", width);
+        setTimeout(() => {
+          progressContainer.style.display = "none"; // Ocultar barra de carga
+          copyAlert.style.display = "none"; // Ocultar alerta
+        }, 500); // 0.5 segundos adicionales de visibilidad antes de desaparecer
       }
-    }, 300);
+    }, intervalTime);
   }
 
   // Filtro en tiempo real con jQuery
