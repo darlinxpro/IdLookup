@@ -10,8 +10,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <style>
     .progress {
-      display: none; /* Oculta la barra hasta que se active */
+      display: none;
       margin-top: 10px;
+    }
+    .loading {
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -22,15 +27,14 @@
   <p>Type in the box to search by ID or Name:</p>  
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
   <br>
-  
-  <!-- Player ID input and botón -->
+
   <div class="form-inline">
     <label for="playerId">Player ID:</label>
     <input class="form-control ml-2" id="playerId" type="number">
     <button class="btn btn-success ml-2" id="toggleButton" onclick="togglePlayerId()">Confirmar</button>
   </div>
   <br>
-  
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -39,65 +43,79 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody id="myTable">
-    </tbody>
+    <tbody id="myTable"></tbody>
   </table>
 
-  <!-- Contenedor de la alerta y barra de carga -->
-  <div id="copyAlert" class="alert alert-success" style="display: none;">
-    ¡Copiado al portapapeles!
-  </div>
-
-  <div class="progress">
-    <div id="progressBar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-      aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-    </div>
+  <div id="loadingMessage" class="loading" style="display: none;">
+    Cargando más datos...
   </div>
 </div>
 
 <script>
-  // Leer id.txt y generar filas con botón de copiar
+  let data = []; 
+  let visibleCount = 20; // Número de filas que se muestran inicialmente
+
+  // Leer id.txt y almacenar datos
   fetch('id.txt')
     .then(response => response.text())
     .then(text => {
-      const lines = text.split('\n').filter(line => line.includes('='));
-      const tbody = document.getElementById("myTable");
-
-      lines.forEach(line => {
+      data = text.split('\n').filter(line => line.includes('=')).map(line => {
         const [id, name] = line.split('=');
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${id.trim()}</td>
-          <td>${name.trim()}</td>
-          <td><button class="btn btn-primary" onclick="copyToClipboard('${id.trim()}')">Copiar</button></td>
-        `;
-        tbody.appendChild(tr);
+        return { id: id.trim(), name: name.trim() };
       });
+      loadMoreData(); // Cargar las primeras filas
     });
+
+  // Función para cargar más datos al hacer scroll
+  function loadMoreData() {
+    const tbody = document.getElementById("myTable");
+    const end = visibleCount + 20; // Cargar 20 más
+
+    for (let i = visibleCount; i < end && i < data.length; i++) {
+      const { id, name } = data[i];
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${id}</td>
+        <td>${name}</td>
+        <td><button class="btn btn-primary" onclick="copyToClipboard('${id}')">Copiar</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
+    visibleCount = end;
+  }
+
+  // Detectar scroll y cargar más datos
+  window.addEventListener("scroll", () => {
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const documentHeight = document.body.offsetHeight;
+
+    if (scrollPosition >= documentHeight - 100) {
+      document.getElementById("loadingMessage").style.display = "block";
+      setTimeout(() => {
+        loadMoreData();
+        document.getElementById("loadingMessage").style.display = "none";
+      }, 1000);
+    }
+  });
 
   // Función para bloquear/desbloquear Player ID con el mismo botón
   function togglePlayerId() {
     const playerIdInput = document.getElementById("playerId");
     const toggleButton = document.getElementById("toggleButton");
 
-    if (playerIdInput.disabled) {
-      playerIdInput.disabled = false;
-      toggleButton.textContent = "Confirmar";
-    } else {
-      playerIdInput.disabled = true;
-      toggleButton.textContent = "Desbloquear";
-    }
+    playerIdInput.disabled = !playerIdInput.disabled;
+    toggleButton.textContent = playerIdInput.disabled ? "Desbloquear" : "Confirmar";
   }
 
-  // Función para copiar ID + Player ID + 1 al portapapeles y animar la barra de carga
+  // Función para copiar ID + Player ID + 1 al portapapeles
   function copyToClipboard(id) {
     const playerId = document.getElementById("playerId").value;
     if (!playerId) {
       alert("Por favor ingresa un Player ID antes de copiar.");
       return;
     }
-    
-    const finalValue = `${id} ${playerId} 1`; // Ahora separado por espacios
+
+    const finalValue = `${id} ${playerId} 1`;
     const tempInput = document.createElement("input");
     document.body.appendChild(tempInput);
     tempInput.value = finalValue;
@@ -105,32 +123,12 @@
     document.execCommand("copy");
     document.body.removeChild(tempInput);
 
-    // Mostrar alerta de copia
     const copyAlert = document.getElementById("copyAlert");
     copyAlert.style.display = "block";
 
-    // Mostrar y animar barra de progreso
-    const progressBar = document.getElementById("progressBar");
-    const progressContainer = document.querySelector(".progress");
-    progressContainer.style.display = "block";
-
-    let width = 0;
-    let totalTime = 2000; // 2 segundos
-    let intervalTime = totalTime / 100; // Incremento cada 20ms
-
-    const interval = setInterval(() => {
-      width += 1;
-      progressBar.style.width = width + "%";
-      progressBar.setAttribute("aria-valuenow", width);
-
-      if (width >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          progressContainer.style.display = "none"; // Ocultar barra de carga
-          copyAlert.style.display = "none"; // Ocultar alerta
-        }, 500); // 0.5 segundos adicionales de visibilidad antes de desaparecer
-      }
-    }, intervalTime);
+    setTimeout(() => {
+      copyAlert.style.display = "none";
+    }, 2000);
   }
 
   // Filtro en tiempo real con jQuery
