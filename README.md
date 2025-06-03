@@ -30,7 +30,7 @@ Ejemplo:
 ## 📂 Instalación y uso local
 Si deseas usar la herramienta localmente:
 1. Clona este repositorio:
-2.git clone https://github.com/TU_USUARIO/BNGO2-ID-Lookup.git
+2.https://github.com/darlinxpro/IdLookup.git
 3. Abre `index.html` en tu navegador.
 
 ## 👨‍💻 Contribuir
