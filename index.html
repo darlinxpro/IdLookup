@@ -53,7 +53,8 @@
 
 <script>
   let data = []; 
-  let visibleCount = 20; // Número de filas que se muestran inicialmente
+  let visibleCount = 0; // Inicialmente sin filas cargadas
+  let rowsPerLoad = Math.floor(window.innerHeight / 50); // Calculamos cuántas filas caben en pantalla
 
   // Leer id.txt y almacenar datos
   fetch('id.txt')
@@ -63,13 +64,13 @@
         const [id, name] = line.split('=');
         return { id: id.trim(), name: name.trim() };
       });
-      loadMoreData(); // Cargar las primeras filas
+      loadMoreData(); // Cargar filas iniciales según pantalla
     });
 
-  // Función para cargar más datos al hacer scroll
+  // Función para cargar más datos dependiendo de la pantalla
   function loadMoreData() {
     const tbody = document.getElementById("myTable");
-    const end = visibleCount + 20; // Cargar 20 más
+    const end = visibleCount + rowsPerLoad; // Cargar cantidad de filas según pantalla
 
     for (let i = visibleCount; i < end && i < data.length; i++) {
       const { id, name } = data[i];
@@ -84,7 +85,7 @@
     visibleCount = end;
   }
 
-  // Detectar scroll y cargar más datos
+  // Detectar scroll y cargar más datos proporcionalmente
   window.addEventListener("scroll", () => {
     const scrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.body.offsetHeight;
