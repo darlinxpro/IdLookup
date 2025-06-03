@@ -32,9 +32,9 @@ Ejemplo:
 
 ## 📂 Instalación y uso local
 Si deseas usar la herramienta localmente:
-1. Clona este repositorio:
-2.https://github.com/darlinxpro/IdLookup.git
-3. Abre `index.html` en tu navegador.
+1. Clona este repositorio:  https://github.com/darlinxpro/IdLookup.git
+2. Abre `index.html` en tu navegador.
+3. Y usa el archivo como desees.
 
 ## 👨‍💻 Contribuir
 Si deseas ayudar a mejorar esta herramienta, ¡los pull requests son bienvenidos! 💡
