@@ -23,7 +23,7 @@
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
   <br>
   
-  <!-- Player ID input and button -->
+  <!-- Player ID input and botón -->
   <div class="form-inline">
     <label for="playerId">Player ID:</label>
     <input class="form-control ml-2" id="playerId" type="number">
@@ -61,7 +61,7 @@
     .then(response => response.text())
     .then(text => {
       const lines = text.split('\n').filter(line => line.includes('='));
-      const tbody = document.getElementById('myTable');
+      const tbody = document.getElementById("myTable");
 
       lines.forEach(line => {
         const [id, name] = line.split('=');
@@ -97,7 +97,7 @@
       return;
     }
     
-    const finalValue = `${id} + ${playerId} + 1`;
+    const finalValue = `${id} ${playerId} 1`; // Ahora separado por espacios
     const tempInput = document.createElement("input");
     document.body.appendChild(tempInput);
     tempInput.value = finalValue;
@@ -113,7 +113,7 @@
     const progressBar = document.getElementById("progressBar");
     const progressContainer = document.querySelector(".progress");
     progressContainer.style.display = "block";
-    
+
     let width = 0;
     let totalTime = 2000; // 2 segundos
     let intervalTime = totalTime / 100; // Incremento cada 20ms
