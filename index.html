@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Blueprint Search</title>
   <meta charset="utf-8">
@@ -13,137 +14,157 @@
       display: none;
       margin-top: 10px;
     }
+
     .loading {
       text-align: center;
       padding: 10px;
       font-weight: bold;
     }
+
+    body {
+      padding-bottom: 60px;
+      /* Espacio extra para evitar que el footer oculte contenido */
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
   </style>
 </head>
+
 <body>
 
-<div class="container mt-3">
-  <h2>Blueprint Table</h2>
-  <p>Type in the box to search by ID or Name:</p>  
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
-  <br>
+  <div class="container mt-3">
+    <h2>Blueprint Table</h2>
+    <p>Type in the box to search by ID or Name:</p>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <br>
 
-  <div class="form-inline">
-    <label for="playerId">Player ID:</label>
-    <input class="form-control ml-2" id="playerId" type="number">
-    <button class="btn btn-success ml-2" id="toggleButton" onclick="togglePlayerId()">Confirmar</button>
+    <div class="form-inline">
+      <label for="playerId">Player ID:</label>
+      <input class="form-control ml-2" id="playerId" type="number">
+      <button class="btn btn-success ml-2" id="toggleButton" onclick="togglePlayerId()">Confirmar</button>
+    </div>
+    <br>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="myTable"></tbody>
+    </table>
+
+    <div id="loadingMessage" class="loading" style="display: none;">
+      Cargando más datos...
+    </div>
   </div>
-  <br>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody id="myTable"></tbody>
-  </table>
+  <script>
+    let data = [];
+    let visibleCount = 0; // Inicialmente sin filas cargadas
+    let rowsPerLoad = Math.floor(window.innerHeight / 50); // Calculamos cuántas filas caben en pantalla
 
-  <div id="loadingMessage" class="loading" style="display: none;">
-    Cargando más datos...
-  </div>
-</div>
-
-<script>
-  let data = []; 
-  let visibleCount = 0; // Inicialmente sin filas cargadas
-  let rowsPerLoad = Math.floor(window.innerHeight / 50); // Calculamos cuántas filas caben en pantalla
-
-  // Leer id.txt y almacenar datos
-  fetch('id.txt')
-    .then(response => response.text())
-    .then(text => {
-      data = text.split('\n').filter(line => line.includes('=')).map(line => {
-        const [id, name] = line.split('=');
-        return { id: id.trim(), name: name.trim() };
+    // Leer id.txt y almacenar datos
+    fetch('id.txt')
+      .then(response => response.text())
+      .then(text => {
+        data = text.split('\n').filter(line => line.includes('=')).map(line => {
+          const [id, name] = line.split('=');
+          return { id: id.trim(), name: name.trim() };
+        });
+        loadMoreData(); // Cargar filas iniciales según pantalla
       });
-      loadMoreData(); // Cargar filas iniciales según pantalla
-    });
 
-  // Función para cargar más datos dependiendo de la pantalla
-  function loadMoreData() {
-    const tbody = document.getElementById("myTable");
-    const end = visibleCount + rowsPerLoad; // Cargar cantidad de filas según pantalla
+    // Función para cargar más datos dependiendo de la pantalla
+    function loadMoreData() {
+      const tbody = document.getElementById("myTable");
+      const end = visibleCount + rowsPerLoad; // Cargar cantidad de filas según pantalla
 
-    for (let i = visibleCount; i < end && i < data.length; i++) {
-      const { id, name } = data[i];
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
+      for (let i = visibleCount; i < end && i < data.length; i++) {
+        const { id, name } = data[i];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
         <td>${id}</td>
         <td>${name}</td>
         <td><button class="btn btn-primary" onclick="copyToClipboard('${id}')">Copiar</button></td>
       `;
-      tbody.appendChild(tr);
+        tbody.appendChild(tr);
+      }
+      visibleCount = end;
     }
-    visibleCount = end;
-  }
 
-  // Detectar scroll y cargar más datos proporcionalmente
-  window.addEventListener("scroll", () => {
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const documentHeight = document.body.offsetHeight;
+    // Detectar scroll y cargar más datos proporcionalmente
+    window.addEventListener("scroll", () => {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const documentHeight = document.body.offsetHeight;
 
-    if (scrollPosition >= documentHeight - 100) {
-      document.getElementById("loadingMessage").style.display = "block";
+      if (scrollPosition >= documentHeight - 100) {
+        document.getElementById("loadingMessage").style.display = "block";
+        setTimeout(() => {
+          loadMoreData();
+          document.getElementById("loadingMessage").style.display = "none";
+        }, 1000);
+      }
+    });
+
+    // Función para bloquear/desbloquear Player ID con el mismo botón
+    function togglePlayerId() {
+      const playerIdInput = document.getElementById("playerId");
+      const toggleButton = document.getElementById("toggleButton");
+
+      playerIdInput.disabled = !playerIdInput.disabled;
+      toggleButton.textContent = playerIdInput.disabled ? "Desbloquear" : "Confirmar";
+    }
+
+    // Función para copiar ID + Player ID + 1 al portapapeles
+    function copyToClipboard(id) {
+      const playerId = document.getElementById("playerId").value;
+      if (!playerId) {
+        alert("Por favor ingresa un Player ID antes de copiar.");
+        return;
+      }
+
+      const finalValue = `${id} ${playerId} 1`;
+      const tempInput = document.createElement("input");
+      document.body.appendChild(tempInput);
+      tempInput.value = finalValue;
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      const copyAlert = document.getElementById("copyAlert");
+      copyAlert.style.display = "block";
+
       setTimeout(() => {
-        loadMoreData();
-        document.getElementById("loadingMessage").style.display = "none";
-      }, 1000);
-    }
-  });
-
-  // Función para bloquear/desbloquear Player ID con el mismo botón
-  function togglePlayerId() {
-    const playerIdInput = document.getElementById("playerId");
-    const toggleButton = document.getElementById("toggleButton");
-
-    playerIdInput.disabled = !playerIdInput.disabled;
-    toggleButton.textContent = playerIdInput.disabled ? "Desbloquear" : "Confirmar";
-  }
-
-  // Función para copiar ID + Player ID + 1 al portapapeles
-  function copyToClipboard(id) {
-    const playerId = document.getElementById("playerId").value;
-    if (!playerId) {
-      alert("Por favor ingresa un Player ID antes de copiar.");
-      return;
+        copyAlert.style.display = "none";
+      }, 2000);
     }
 
-    const finalValue = `${id} ${playerId} 1`;
-    const tempInput = document.createElement("input");
-    document.body.appendChild(tempInput);
-    tempInput.value = finalValue;
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-
-    const copyAlert = document.getElementById("copyAlert");
-    copyAlert.style.display = "block";
-
-    setTimeout(() => {
-      copyAlert.style.display = "none";
-    }, 2000);
-  }
-
-  // Filtro en tiempo real con jQuery
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    // Filtro en tiempo real con jQuery
+    $(document).ready(function () {
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
       });
     });
-  });
-</script>
-<footer style="position: fixed; bottom: 0; width: 100%; background-color: #333; color: white; text-align: center; padding: 10px;">
-  Powered by Darlinxpro
-</footer>
+  </script>
+  <footer
+    style="position: fixed; bottom: 0; width: 100%; background-color: #333; color: white; text-align: center; padding: 10px;">
+    Powered by Darlinxpro
+  </footer>
 </body>
+
 </html>
