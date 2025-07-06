@@ -2674,3 +2674,11 @@
 4662=Testing Pack I
 4663=Testing Pack II
 4664=Testing Pack III
+4671=Doombringer Rail Blueprint
+4672=Juggenaut Cannon Blueprint
+4673=Helios Gauss Blueprint
+4674=Oblivion Blaster Blueprint
+4675=Leviathan Barrage Blueprint
+4676=Cerberus Torpedoes Blueprint
+4677=Vortex Disruptor Blueprint
+4678=Echo Amplifier Blueprint
