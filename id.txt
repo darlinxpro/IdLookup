@@ -2682,3 +2682,5 @@
 4676=Cerberus Torpedoes Blueprint
 4677=Vortex Disruptor Blueprint
 4678=Echo Amplifier Blueprint
+4679=Exodus Warhead BP
+4680=Astral Ward BP
