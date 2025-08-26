@@ -2684,3 +2684,5 @@
 4678=Echo Amplifier Blueprint
 4679=Exodus Warhead BP
 4680=Astral Ward BP
+4681=Quantum armor
+4682=Chrono Engine
