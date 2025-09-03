@@ -1,4 +1,4 @@
-# BNGO2 ID Lookup
+# ID Lookup
 
 BNGO2 ID Lookup es una herramienta web diseñada para **buscar y copiar los ID de los ítems** del juego BNGO2. Permite **enviar ítems a los jugadores** en el chat del juego con el ID correcto y un Player ID específico.
 
