@@ -2524,9 +2524,9 @@
 4512=Jack-O-Lantern Chest
 4513=Ghostly Planet
 4514=Artemis Blueprint
-4515=The Dicators Scroll
+4515=The Dictators Scroll
 4516=Dune Enforcers Scroll
-4517=The Dicators Scroll Chest
+4517=The Dictators Scroll Chest
 4518=Dune Enforcers Scroll Chest
 4519=Artemis Chest
 4520=Ancient Artillery (Blueprint)
@@ -2686,3 +2686,4 @@
 4680=Astral Ward BP
 4681=Quantum armor
 4682=Chrono Engine
+
