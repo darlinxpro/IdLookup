@@ -50,8 +50,8 @@
 
   <div class="container mt-3">
     <h2>ID Lookup</h2>
-    <p>Type in the box to search by ID or Name:</p>
-    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <p>Type in the box to search by ID, Name or Star (e.g., R8 for 8★):</p>
+    <input class="form-control" id="myInput" type="text" placeholder="Search.. (R1-R9 for stars)">
     <br>
 
     <div class="form-inline">
@@ -127,7 +127,25 @@
       const tbody = document.getElementById("myTable");
       tbody.innerHTML = ""; 
 
-      const filteredData = data.filter(item => item.id.includes(value) || item.name.toLowerCase().includes(value));
+      let filteredData = data;
+
+      const starMatch = value.match(/^r(\d+)$/);
+      if (starMatch) {
+        const starNum = starMatch[1];
+        filteredData = data.filter(item => item.name.includes(starNum + "★"));
+      } else if (value.includes(" r")) {
+        const parts = value.split(" r");
+        const namePart = parts[0].trim();
+        const starPart = parts[1].match(/^(\d+)$/);
+        if (starPart) {
+          filteredData = data.filter(item => 
+            item.name.toLowerCase().includes(namePart) && 
+            item.name.includes(starPart[1] + "★")
+          );
+        }
+      } else {
+        filteredData = data.filter(item => item.id.includes(value) || item.name.toLowerCase().includes(value));
+      }
 
       filteredData.forEach(({ id, name }) => {
         const tr = document.createElement('tr');
