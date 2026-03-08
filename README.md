@@ -25,7 +25,7 @@ BNGO2 ID Lookup es una herramienta web diseñada para **buscar y copiar los ID d
 
 ## 📌 Formato de copia
 Cuando copias un ítem, el portapapeles contendrá lo siguiente:
-/giveuser PlayerID IdItem 1
+/senditem PlayerID IdItem Cant
 
 Ejemplo:
 /senditem 5 6 1
