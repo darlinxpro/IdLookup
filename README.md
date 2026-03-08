@@ -1,6 +1,6 @@
 # ID Lookup
 
-BNGO2 ID Lookup es una herramienta web diseñada para **buscar y copiar los ID de los ítems** del juego BNGO2. Permite **enviar ítems a los jugadores** en el chat del juego con el ID correcto y un Player ID específico.
+TSO ID Lookup es una herramienta web diseñada para **buscar y copiar los ID de los ítems** del juego TSO. Permite **enviar ítems a los jugadores** en el chat del juego con el ID correcto y un Player ID específico.
 
 🔗 **Sitio Web:**  
 👉 [ID Lookup](https://darlinxpro.github.io/IdLookup/)
@@ -28,12 +28,7 @@ Cuando copias un ítem, el portapapeles contendrá lo siguiente:
 /senditem PlayerID IdItem Cant
 
 Ejemplo:
-/senditem 5 6 1
-
-## ⚠ Problemas conocidos
-🔹 Algunos bugs afectan la **precisión del scroll infinito**, por lo que ciertos ítems pueden no mostrarse.  
-🔹 **Mejoras en el rendimiento** serán agregadas para optimizar la carga de datos.  
-🔹 **Correcciones de filtrado** para asegurar que todos los ítems sean encontrados, aunque no estén visibles de inmediato.  
+/senditem 5 6 1 
 
 ## 📂 Instalación y uso local
 Si deseas usar la herramienta localmente:
