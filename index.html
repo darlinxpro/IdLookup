@@ -9,6 +9,89 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <style>
+    body {
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+      min-height: 100vh;
+      color: #e0e0e0;
+      padding-bottom: 80px;
+    }
+
+    .container {
+      background: rgba(0, 16, 51, 0.8);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      color: #ccba7a;
+      text-shadow: 0 0 10px rgba(204, 187, 122, 0.3);
+    }
+
+    .table {
+      background: rgba(0, 16, 51, 0.6);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+      border-color: #0072f5 !important;
+      color: #e0e0e0;
+    }
+
+    .table td:first-child {
+      color: #339af0;
+      font-weight: 500;
+    }
+
+    .table thead th {
+      background: linear-gradient(180deg, #001033 0%, #002552 100%);
+      color: #ccba7a;
+      border-bottom: 2px solid #0072f5;
+    }
+
+    .table tbody tr {
+      transition: all 0.2s;
+    }
+
+    .table tbody tr:hover {
+      background: rgba(0, 115, 245, 0.15);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #0072f5 0%, #0056b3 100%);
+      border: none;
+      padding: 5px 15px;
+      border-radius: 4px;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(180deg, #339af0 0%, #0072f5 100%);
+    }
+
+    .form-control {
+      background: rgba(0, 16, 51, 0.8);
+      border: 1px solid #0072f5;
+      color: #fff;
+    }
+
+    .form-control:focus {
+      background: rgba(0, 16, 51, 1);
+      border-color: #339af0;
+      box-shadow: 0 0 10px rgba(51, 154, 240, 0.3);
+      color: #fff;
+    }
+
+    .form-control::placeholder {
+      color: #868e96;
+    }
+
+    footer {
+      background: linear-gradient(180deg, #001033 0%, #000814 100%);
+    }
+
     .progress {
       display: none;
       margin-top: 10px;
@@ -35,6 +118,19 @@
       font-size: 14px;
     }
 
+    label {
+      color: #ccba7a;
+    }
+
+    .btn-success {
+      background: linear-gradient(180deg, #28a745 0%, #1e7e34 100%);
+      border: none;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(180deg, #51cf66 0%, #28a745 100%);
+    }
+
     .copy-confirmation {
       display: table-row;
       width: 100%;
@@ -43,6 +139,111 @@
       color: #0c5460;
       border: 1px solid #bee5eb;
       text-align: center;
+    }
+
+    .commander-link {
+      color: #339af0;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .commander-link:hover {
+      color: #74c0fc;
+      text-shadow: 0 0 10px rgba(51, 154, 240, 0.5);
+    }
+
+    .commander-modal .modal-content {
+      background: linear-gradient(180deg, #001033 0%, #002552 100%);
+      border: 2px solid #0072f5;
+      border-radius: 12px;
+    }
+
+    .commander-modal .modal-body {
+      background-color: transparent;
+      color: white;
+    }
+
+    .commander-modal .modal-lg {
+      max-width: 800px;
+    }
+
+    .commander-modal .modal-header {
+      background: linear-gradient(180deg, #000814 0%, #001033 100%);
+      color: #ccba7a;
+      border-bottom: 2px solid #0072f5;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .commander-modal .close {
+      color: #fff;
+      opacity: 0.8;
+    }
+
+    .commander-modal .close:hover {
+      opacity: 1;
+      color: #339af0;
+    }
+
+    .stat-bar {
+      height: 20px;
+      background-color: #001033;
+      border-radius: 4px;
+      margin: 2px 0;
+    }
+
+    .stat-fill {
+      height: 100%;
+      background-color: #0072f5;
+      border-radius: 4px;
+    }
+
+    .commander-modal .table-dark {
+      background-color: #001033;
+    }
+
+    .commander-modal .table-dark th,
+    .commander-modal .table-dark td {
+      border-color: #0072f5;
+    }
+
+    .commander-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      z-index: 0;
+      border-radius: 8px;
+    }
+
+    .commander-modal .modal-body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prof-box:hover {
+      background: rgba(0,115,245,0.4) !important;
+      transform: scale(1.05);
+      transition: all 0.2s;
+    }
+
+    .tooltip .tooltip-inner {
+      background-color: #001033;
+      color: #fff;
+      border: 1px solid #0072f5;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
     }
   </style>
 </head>
@@ -56,7 +257,7 @@
 
     <div class="form-inline">
       <label for="playerId">Player ID:</label>
-      <input class="form-control ml-2" id="playerId" type="number">
+      <input class="form-control ml-2" id="playerId" type="number" placeholder="Player ID">
       <button class="btn btn-success ml-2" id="toggleButton" onclick="togglePlayerId()">Confirmar</button>
     </div>
     <br>
@@ -79,18 +280,25 @@
 
   <script>
     let data = []; 
+    let commanders = {};
     let visibleCount = 0;
     let rowsPerLoad = Math.floor(window.innerHeight / 50);
 
-    fetch('id.txt')
-      .then(response => response.text())
-      .then(text => {
-        data = text.split('\n').filter(line => line.includes('=')).map(line => {
-          const [id, name] = line.split('=');
-          return { id: id.trim(), name: name.trim() };
-        });
-        loadMoreData();
+    Promise.all([
+      fetch('id.txt').then(r => r.text()),
+      fetch('commanders.json').then(r => r.json())
+    ]).then(([idText, cmdJson]) => {
+      commanders = cmdJson;
+      data = idText.split('\n').filter(line => line.includes('=')).map(line => {
+        const [id, name] = line.split('=');
+        return { id: id.trim(), name: name.trim() };
       });
+      console.log('Loaded', data.length, 'items');
+      console.log('Commanders:', Object.keys(commanders));
+      loadMoreData();
+    }).catch(err => {
+      console.error('Error loading data:', err);
+    });
 
     function loadMoreData() {
       const tbody = document.getElementById("myTable");
@@ -98,10 +306,12 @@
 
       for (let i = visibleCount; i < end && i < data.length; i++) {
         const { id, name } = data[i];
+        const baseName = name.replace(/\s+\d+★$/, '');
+        const hasInfo = commanders[baseName];
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${id}</td>
-          <td>${name}</td>
+          <td>${hasInfo ? `<span class="commander-link" onclick="showCommander('${baseName}', '${name}')">${name}</span>` : name}</td>
           <td><button class="btn btn-primary" onclick="copyToClipboard('${id}', this)">Copiar</button></td>
         `;
         tbody.appendChild(tr);
@@ -148,10 +358,12 @@
       }
 
       filteredData.forEach(({ id, name }) => {
+        const baseName = name.replace(/\s+\d+★$/, '');
+        const hasInfo = commanders[baseName];
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${id}</td>
-          <td>${name}</td>
+          <td>${hasInfo ? `<span class="commander-link" onclick="showCommander('${baseName}', '${name}')">${name}</span>` : name}</td>
           <td><button class="btn btn-primary" onclick="copyToClipboard('${id}', this)">Copiar</button></td>
         `;
         tbody.appendChild(tr);
@@ -159,6 +371,95 @@
     }
 
     document.getElementById("myInput").addEventListener("input", filterData);
+
+    function showCommander(name, fullName) {
+      // Extract star level from full name
+      const starMatch = fullName.match(/(\d+)★/);
+      const starLevel = starMatch ? parseInt(starMatch[1]) : 1;
+
+      const cmd = commanders[name];
+      if (!cmd) return;
+
+      const prof = cmd.prof || {};
+      const command = cmd.command || {};
+      const profColors = {'S': '#ff6b6b', 'A': '#51cf66', 'B': '#339af0', 'C': '#fcc419', 'D': '#868e96'};
+      
+      // Damage percentages for weapons (ballistic, directional, missile, carrier, defend)
+      const weaponDmg = {'S': '+30%', 'A': '+10%', 'B': '0%', 'C': '-10%', 'D': '-30%'};
+      // Damage percentages for ships (frigate, cruiser, battleship)
+      const shipDmg = {'S': '-30%', 'A': '-10%', 'B': '0%', 'C': '+10%', 'D': '+30%'};
+      
+      // Image paths for proficiency
+      const profImages = {
+        ballistic: 'https://krtools.info/imgs/layout/effBallistic.png',
+        directional: 'https://krtools.info/imgs/layout/effDirectional.png',
+        missile: 'https://krtools.info/imgs/layout/effMissile.png',
+        carrier: 'https://krtools.info/imgs/layout/effShipBased.png',
+        defend: 'https://krtools.info/imgs/layout/effPlanetary.png',
+        frigate: 'https://krtools.info/imgs/layout/effFrigate.png',
+        cruiser: 'https://krtools.info/imgs/layout/effCruiser.png',
+        battleship: 'https://krtools.info/imgs/layout/effBattleship.png'
+      };
+      
+      document.getElementById('commanderTitle').textContent = name + ' - ' + cmd.type;
+      
+      // Build command table - only show the star level being viewed
+      const c = command[starLevel.toString()] || {frigate: '-', cruiser: '-', battleship: '-'};
+      const commandRow = '<tr><td>' + starLevel + '★</td><td>' + c.frigate + '</td><td>' + c.cruiser + '</td><td>' + c.battleship + '</td></tr>';
+      
+      document.getElementById('commanderBody').innerHTML = 
+        // Imagen + Skill en fila
+        '<div class="commander-bg" style="background-image: url(\'' + cmd.image + '\');"></div>' +
+        '<div class="row mb-4">' +
+          '<div class="col-md-4 text-center">' +
+            '<img src="' + cmd.image + '" alt="' + name + '" style="max-width: 160px; border: 3px solid #0072f5; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">' +
+            '<h5 class="mt-2" style="color: #ccba7a;">' + cmd.type + ' Commander</h5>' +
+          '</div>' +
+          '<div class="col-md-8">' +
+            '<h6 class="border-bottom border-secondary pb-2 mb-2" style="color: #ccba7a;"><strong>⚡ Skill</strong></h6>' +
+            '<h5 class="mb-2">' + cmd.skill + '</h5>' +
+            '<p class="mb-0 text-light" style="font-size: 14px;">' + cmd.skillDesc + '</p>' +
+          '</div>' +
+        '</div>' +
+        
+        // Stats + Proficiency + Ship Power en fila
+        '<div class="row mb-2">' +
+          '<div class="col-md-6">' +
+            '<h6 class="border-bottom border-secondary pb-2 mb-2" style="color: #ccba7a;"><strong>📊 Base Stats</strong></h6>' +
+            '<div class="mb-2"><div><strong>Accuracy: ' + cmd.stats.accuracy + '</strong></div><div class="stat-bar"><div class="stat-fill" style="width: ' + Math.min(cmd.stats.accuracy * 2, 100) + '%; background: linear-gradient(90deg, #0072f5, #00d4ff);"></div></div></div>' +
+            '<div class="mb-2"><div><strong>Speed: ' + cmd.stats.speed + '</strong></div><div class="stat-bar"><div class="stat-fill" style="width: ' + Math.min(cmd.stats.speed * 2, 100) + '%; background: linear-gradient(90deg, #28a745, #20c997);"></div></div></div>' +
+            '<div class="mb-2"><div><strong>Dodge: ' + cmd.stats.dodge + '</strong></div><div class="stat-bar"><div class="stat-fill" style="width: ' + Math.min(cmd.stats.dodge * 2, 100) + '%; background: linear-gradient(90deg, #dc3545, #ff6b6b);"></div></div></div>' +
+            '<div class="mb-2"><div><strong>Electron: ' + cmd.stats.electron + '</strong></div><div class="stat-bar"><div class="stat-fill" style="width: ' + Math.min(cmd.stats.electron * 2, 100) + '%; background: linear-gradient(90deg, #ffc107, #ffb300);"></div></div></div>' +
+          '</div>' +
+          '<div class="col-md-6">' +
+            '<h6 class="border-bottom border-secondary pb-2 mb-2" style="color: #ccba7a;"><strong>🎯 Proficiency</strong></h6>' +
+            '<div class="row text-center">' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (weaponDmg[prof.ballistic] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.ballistic + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.ballistic] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.ballistic || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (weaponDmg[prof.directional] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.directional + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.directional] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.directional || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (weaponDmg[prof.missile] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.missile + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.missile] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.missile || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (weaponDmg[prof.carrier] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.carrier + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.carrier] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.carrier || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (weaponDmg[prof.defend] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.defend + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.defend] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.defend || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (shipDmg[prof.frigate] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.frigate + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.frigate] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.frigate || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (shipDmg[prof.cruiser] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.cruiser + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.cruiser] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.cruiser || '-') + '</span></div></div>' +
+              '<div class="col-3 mb-1"><div class="prof-box" data-toggle="tooltip" data-placement="top" title="Damage: ' + (shipDmg[prof.battleship] || '0%') + '" style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px; cursor: help;"><img src="' + profImages.battleship + '" style="width: 24px; height: 24px;"><br><span style="color: ' + (profColors[prof.battleship] || '#fff') + '; font-size: 12px; font-weight: bold;">' + (prof.battleship || '-') + '</span></div></div>' +
+            '</div>' +
+            '<h6 class="border-bottom border-secondary pb-1 mb-1 mt-2" style="color: #ccba7a; font-size: 12px;"><strong>🚀 Ship Power (' + starLevel + '★)</strong></h6>' +
+            '<div class="row text-center">' +
+              '<div class="col-4"><div style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px;"><img src="https://krtools.info/imgs/layout/effFrigate.png" style="width: 20px; height: 20px;"><br><strong style="color: #339af0; font-size: 12px;">' + c.frigate + '</strong></div></div>' +
+              '<div class="col-4"><div style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px;"><img src="https://krtools.info/imgs/layout/effCruiser.png" style="width: 20px; height: 20px;"><br><strong style="color: #51cf66; font-size: 12px;">' + c.cruiser + '</strong></div></div>' +
+              '<div class="col-4"><div style="background: rgba(0,0,0,0.3); padding: 4px; border-radius: 4px;"><img src="https://krtools.info/imgs/layout/effBattleship.png" style="width: 20px; height: 20px;"><br><strong style="color: #ff6b6b; font-size: 12px;">' + c.battleship + '</strong></div></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        
+        '<div class="mb-2">' +
+          '<h6 class="border-bottom border-secondary pb-2 mb-2" style="color: #ccba7a;"><strong>📖 Description</strong></h6>' +
+          '<p class="mb-0" style="font-size: 13px; line-height: 1.5;">' + cmd.description + '</p>' +
+        '</div>';
+      
+      $('#commanderModal').modal('show');
+      $('[data-toggle="tooltip"]').tooltip();
+    }
 
     function togglePlayerId() {
       const playerIdInput = document.getElementById("playerId");
@@ -219,6 +520,21 @@
   <footer>
     Powered by Darlinxpro
   </footer>
+
+  <div class="modal fade commander-modal" id="commanderModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="commanderTitle">Commander</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="commanderBody">
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
