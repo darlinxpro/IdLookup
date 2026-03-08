@@ -8,11 +8,10 @@ TSO ID Lookup es una herramienta web diseñada para **buscar y copiar los ID de 
 ## 🚀 Funcionalidades
 ✔ **Búsqueda de IDs**: Filtra ítems usando un campo de búsqueda.  
 ✔ **Búsqueda por estrellas**: Escribe **R1-R9** para filtrar por número de estrellas (ej: R8 muestra todos los 8★).  
-✔ **Búsqueda combinada**: Escribe **nombre + R + número** para buscar un personaje específico con cierta estrella (ej: "titan r8").  
+✔ **Búsqueda combinada**: Escribe **nombre + R + número** para buscar un comandante específico con cierta estrella (ej: "titan r8").  
 ✔ **Infinite Scroll**: Carga más ítems a medida que el usuario baja en la lista.  
 ✔ **Copia rápida**: Al hacer clic en "Copiar", el ID del ítem y el Player ID se copian al portapapeles en el formato correcto.  
-✔ **Confirmación visual**: Un mensaje debajo de la fila muestra qué se copió, junto con una barra de progreso.  
-✔ **Footer fijo**: Indica que la herramienta está *Powered by Darlinxpro*.  
+✔ **Confirmación visual**: Un mensaje debajo de la fila muestra qué se copió, junto con una barra de progreso.
 
 ## 🔧 Cómo usar
 1. **Ingresa el Player ID** en el campo correspondiente.  
@@ -28,16 +27,8 @@ Cuando copias un ítem, el portapapeles contendrá lo siguiente:
 /senditem PlayerID IdItem Cant
 
 Ejemplo:
-/senditem 5 6 1 
-
-## 📂 Instalación y uso local
-Si deseas usar la herramienta localmente:
-1. Clona este repositorio:  https://github.com/darlinxpro/IdLookup.git
-2. Abre `index.html` en tu navegador.
-3. Y usa el archivo como desees.
-
-## 👨‍💻 Contribuir
-Si deseas ayudar a mejorar esta herramienta, ¡los pull requests son bienvenidos! 💡
+/senditem 5 6 1
 
 ---
 ✨ **Powered by Darlinxpro** ✨
+<!-- GitAds-Verify: C31KFNJSDOFAYTQ2MVYN8STFDES1KT7B -->
