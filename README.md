@@ -28,7 +28,7 @@ Cuando copias un ítem, el portapapeles contendrá lo siguiente:
 /giveuser PlayerID IdItem 1
 
 Ejemplo:
-/giveuser 2240 10 1
+/senditem 5 6 1
 
 ## ⚠ Problemas conocidos
 🔹 Algunos bugs afectan la **precisión del scroll infinito**, por lo que ciertos ítems pueden no mostrarse.  
